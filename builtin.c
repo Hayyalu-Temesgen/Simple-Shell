@@ -1,27 +1,27 @@
 #include "shell.h"
 
 /**
- * _exit - this function will exit the shell
+ * _myexit - this function will exit the shell
  * @info: this will containing potential arguments
  * Return: will exit with a given exit status
  */
 
-int _exit(info_t *info)
+int _myexit(info_t *info)
 {
 	int exitcheck;
 
 	if (info->argv[1])
 	{
-		exitcheck = _erratoi(info->argv[1]);
+		exitcheck = _atoi(info->argv[1]);
 		if (exitcheck == -1)
 		{
 			info->status = 2;
 			print_error(info, "Illegal number: ");
-			_eputs(info->argv[1]);
-			_eputchar('\n');
+			_puts(info->argv[1]);
+			_putchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv[1]);
+		info->err_num = _atoi(info->argv[1]);
 		return (-2);
 	}
 	info->err_num = -1;
@@ -29,12 +29,12 @@ int _exit(info_t *info)
 }
 
 /**
- * _cd - this function will changes the current directory
+ * _mycd - this function will changes the current directory
  * @info: this will be containing potential arguments
  *  Return: will always return 0
  */
 
-int _cd(info_t *info)
+int _mycd(info_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -68,7 +68,7 @@ int _cd(info_t *info)
 	if (chdir_ret == -1)
 	{
 		print_error(info, "can't cd to ");
-		_eputs(info->argv[1]), _eputchar('\n');
+		_puts(info->argv[1]), _putchar('\n');
 	}
 	else
 	{
@@ -79,12 +79,12 @@ int _cd(info_t *info)
 }
 
 /**
- * _help - this function will changes the current directory of the process
+ * _myhelp - this function will changes the current directory of the process
  * @info: this will be containing potential arguments
  *  Return: will always return 0
  */
 
-int _help(info_t *info)
+int _myhelp(info_t *info)
 {
 	char **arg_array;
 

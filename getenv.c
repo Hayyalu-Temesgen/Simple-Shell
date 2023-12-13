@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * get_env - this function will return the string array
+ * get_environ - this function will return the string array
  * @info: Structure containing potential arguments
  * Return: will always return 0
  */
 
-char **get_env(info_t *info)
+char **get_environ(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{

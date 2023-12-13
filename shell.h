@@ -176,9 +176,9 @@ char *convert_number(long int, int, int);
 void remove_comment(char *);
 
 /* toem_builtin.c */
-int _exit(info_t *);
-int _cd(info_t *);
-int _help(info_t *);
+int _myexit(info_t *);
+int _mycd(info_t *);
+int _myhelp(info_t *);
 
 /* toem_builtin1.c */
 int my_history(info_t *);
@@ -202,7 +202,7 @@ int my_unset_env(info_t *);
 int pop_env_list(info_t *);
 
 /* toem_getenv.c */
-char **get_env(info_t *);
+char **get_environ(info_t *);
 int unset_env(info_t *, char *);
 int set_env(info_t *, char *, char *);
 
