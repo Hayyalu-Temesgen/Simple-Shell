@@ -70,8 +70,10 @@ int read_history(info_t *info)
 
 	fd = open(filename, O_RDONLY);
 	free(filename);
-	if (fd == -1)
+	if ((int)fd == -1)
+	{
 		return (0);
+	}
 	if (!fstat(fd, &st))
 		filesize = st.st_size;
 	if (filesize < 2)
@@ -84,15 +86,17 @@ int read_history(info_t *info)
 	if (rdlen <= 0)
 		return (free(buf), 0);
 	close(fd);
-	for (i = 0; i < filesize; i++)
+	for (i = 0; (int)i < filesize; i++)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
 			build_history_list(info, buf + last, linecount++);
 			last = i + 1;
 		}
-	if (last != i)
+	if (last != (int)i)
+	{
 		build_history_list(info, buf + last, linecount++);
+	}
 	free(buf);
 	info->histcount = linecount;
 	while (info->histcount-- >= HIST_MAX)
@@ -115,11 +119,11 @@ int build_history_list(info_t *info, char *buf, int linecount)
 
 	if (info->history)
 		node = info->history;
-		add_node_end(&node, buf, linecount);
+	add_node_end(&node, buf, linecount);
 
 	if (!info->history)
 		info->history = node;
-		return (0);
+	return (0);
 }
 
 /**
