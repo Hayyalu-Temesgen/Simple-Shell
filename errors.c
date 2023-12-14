@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- *_errputs - this function will print an input string
+ *_eputs - this function will print an input string
  * @str: the string
  * Return: will return nothing
  */
 
-void _errputs(char *str)
+void _eputs(char *str)
 {
 	int i = 0;
 
@@ -14,18 +14,18 @@ void _errputs(char *str)
 		return;
 	while (str[i] != '\0')
 	{
-		_errputchar(str[i]);
+		_eputchar(str[i]);
 		i++;
 	}
 }
 
 /**
- * _errputchar - this function will write the character c to stderr
+ * _eputchar - this function will write the character c to stderr
  * @c: The character
  * Return: will return 1 on success, -1 on error
  */
 
-int _errputchar(char c)
+int _eputchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
@@ -41,13 +41,13 @@ int _errputchar(char c)
 }
 
 /**
- * _putfdesc - this function will write the character c to given fd
+ * _putfd - this function will write the character c to given fd
  * @c: The character
  * @fd: The filedescriptor to write to
  * Return: will return 1 on success, -1 on error
  */
 
-int _putfdesc(char c, int fd)
+int _putfd(char c, int fd)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
@@ -63,13 +63,13 @@ int _putfdesc(char c, int fd)
 }
 
 /**
- *_putsfdesc - this function will print an input string
+ *_putsfd - this function will print an input string
  * @str: the string
  * @fd: the filedescriptor to write to
  * Return: will return the number
  */
 
-int _putsfdesc(char *str, int fd)
+int _putsfd(char *str, int fd)
 {
 	int i = 0;
 
@@ -77,7 +77,7 @@ int _putsfdesc(char *str, int fd)
 		return (0);
 	while (*str)
 	{
-		i += _putfdesc(*str++, fd);
+		i += _putfd(*str++, fd);
 	}
 	return (i);
 }

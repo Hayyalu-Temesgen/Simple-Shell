@@ -6,7 +6,7 @@
  * Return: will return the allocated string
  */
 
-char *get_history(info_t *info)
+char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
 
@@ -32,7 +32,7 @@ char *get_history(info_t *info)
 int write_history(info_t *info)
 {
 	ssize_t fd;
-	char *filename = get_history(info);
+	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
@@ -63,7 +63,7 @@ int read_history(info_t *info)
 	int i, last = 0, linecount = 0;
 	size_t fd, rdlen, filesize = 0;
 	struct stat st;
-	char *buf = NULL, *filename = get_history(info);
+	char *buf = NULL, *filename = get_history_file(info);
 
 	if (!filename)
 		return (0);
@@ -88,16 +88,16 @@ int read_history(info_t *info)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			history_list(info, buf + last, linecount++);
+			build_history_list(info, buf + last, linecount++);
 			last = i + 1;
 		}
 	if (last != i)
-		history_list(info, buf + last, linecount++);
+		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
 	while (info->histcount-- >= HIST_MAX)
 		delete_node_at_index(&(info->history), 0);
-	new_history(info);
+	renumber_history(info);
 	return (info->histcount);
 }
 
@@ -109,7 +109,7 @@ int read_history(info_t *info)
  * Return: will always return 0
  */
 
-int history_list(info_t *info, char *buf, int linecount)
+int build_history_list(info_t *info, char *buf, int linecount)
 {
 	list_t *node = NULL;
 
@@ -123,12 +123,12 @@ int history_list(info_t *info, char *buf, int linecount)
 }
 
 /**
- * new_history - this function renumbers the history
+ * renumber_history - this function renumbers the history
  * @info: Structure containing potential argument
  * Return: the new histcount
  */
 
-int new_history(info_t *info)
+int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
 	int i = 0;

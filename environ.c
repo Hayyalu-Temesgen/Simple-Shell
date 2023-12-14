@@ -1,25 +1,25 @@
 #include "shell.h"
 
 /**
- * my_env - this function will print the current environment
+ * _myenv - this function will print the current environment
  * @info: Structure containing potential arguments
  * Return: will always return 0
  */
 
-int my_env(info_t *info)
+int _myenv(info_t *info)
 {
 	print_list_str(info->env);
 		return (0);
 }
 
 /**
- * get_env - this function get the value of an environ variable
+ * _getenv - this function get the value of an environ variable
  * @info: Structure containing potential arguments
  * @name: the name of env
  * Return: will return the value of env
  */
 
-char *get_env(info_t *info, const char *name)
+char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->env;
 	char *p;
@@ -35,12 +35,12 @@ char *get_env(info_t *info, const char *name)
 }
 
 /**
- * my_set_env - this function will initialize a new environment variable
+ * _mysetenv - this function will initialize a new environment variable
  * @info: Structure containing potential arguments
  * Return: will always return 0
  */
 
-int my_set_env(info_t *info)
+int _mysetenv(info_t *info)
 {
 	if (info->argc != 3)
 	{
@@ -53,12 +53,12 @@ int my_set_env(info_t *info)
 }
 
 /**
- * my_unset_env - this function will remove an environment variable
+ * _myunsetenv - this function will remove an environment variable
  * @info: Structure containing potential arguments
  * Return: will always return 0
  */
 
-int my_unset_env(info_t *info)
+int _myunsetenv(info_t *info)
 {
 	int i;
 
@@ -73,12 +73,12 @@ int my_unset_env(info_t *info)
 }
 
 /**
- * pop_env_list - this function will populate env linked list
+ * populate_env_list - this function will populate env linked list
  * @info: Structure containing potential arguments
  * Return: will always return 0
  */
 
-int pop_env_list(info_t *info)
+int populate_env_list(info_t *info)
 {
 	list_t *node = NULL;
 	size_t i;

@@ -1,25 +1,25 @@
 #include "shell.h"
 
 /**
- * my_history - this function displays the history list
+ * _myhistory - this function displays the history list
  * @info: Structure containing potential arguments
  *  Return: will always return 0
  */
 
-int my_history(info_t *info)
+int _myhistory(info_t *info)
 {
 	print_list(info->history);
 	return (0);
 }
 
 /**
- * alias_unset - this function sets alias
+ * unset_alias - this function sets alias
  * @info: the parameter
  * @str: the string
  * Return: will always return 0
  */
 
-int alias_unset(info_t *info, char *str)
+int unset_alias(info_t *info, char *str)
 {
 	char *p, c;
 	int ret;
@@ -30,19 +30,19 @@ int alias_unset(info_t *info, char *str)
 	c = *p;
 	*p = 0;
 	ret = delete_node_at_index(&(info->alias),
-	get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
 	*p = c;
 	return (ret);
 }
 
 /**
- * alias_set - this function sets alias to string
+ * set_alias - this function sets alias to string
  * @info: the parameter
  * @str: the string
  * Return: will always return 0
  */
 
-int alias_set(info_t *info, char *str)
+int set_alias(info_t *info, char *str)
 {
 	char *p;
 
@@ -50,9 +50,9 @@ int alias_set(info_t *info, char *str)
 	if (!p)
 		return (1);
 	if (!*++p)
-		return (alias_unset(info, str));
+		return (unset_alias(info, str));
 
-	alias_unset(info, str);
+	unset_alias(info, str);
 	return (add_node_end(&(info->alias), str, 0) == NULL);
 }
 
@@ -80,12 +80,12 @@ int print_alias(list_t *node)
 }
 
 /**
- * my_alias - this functio will mimic the man alias
+ * _myalias - this functio will mimic the man alias
  * @info: Structure containing potential arguments
  *  Return: will always return 0
  */
 
-int my_alias(info_t *info)
+int _myalias(info_t *info)
 {
 	int i = 0;
 	char *p = NULL;
@@ -105,7 +105,7 @@ int my_alias(info_t *info)
 	{
 		p = _strchr(info->argv[i], '=');
 		if (p)
-			alias_set(info, info->argv[i]);
+			set_alias(info, info->argv[i]);
 		else
 			print_alias(node_starts_with(info->alias, info->argv[i], '='));
 	}

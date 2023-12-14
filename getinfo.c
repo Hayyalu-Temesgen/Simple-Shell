@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * clrinfo - this function will initialize info_t
+ * clear_info - this function will initialize info_t
  * @info: the address
  */
 
-void clrinfo(info_t *info)
+void clear_info(info_t *info)
 {
 	info->arg = NULL;
 	info->argv = NULL;
@@ -14,12 +14,12 @@ void clrinfo(info_t *info)
 }
 
 /**
- * setinfo - this function will initialize info_t
+ * set_info - this function will initialize info_t
  * @info: the address
  * @av: the argument vector
  */
 
-void setinfo(info_t *info, char **av)
+void set_info(info_t *info, char **av)
 {
 	int i = 0;
 
@@ -46,12 +46,12 @@ void setinfo(info_t *info, char **av)
 }
 
 /**
- * freeinfo - this function will free info_t
+ * free_info - this function will free info_t
  * @info: the address
  * @all: will be all true if freeing all fields
  */
 
-void freeinfo(info_t *info, int all)
+void free_info(info_t *info, int all)
 {
 	ffree(info->argv);
 	info->argv = NULL;
