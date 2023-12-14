@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * get_history - this function will get the history file
+ * get_history_file - this function will get the history file
  * @info: the parameter
  * Return: will return the allocated string
  */
@@ -67,13 +67,10 @@ int read_history(info_t *info)
 
 	if (!filename)
 		return (0);
-
 	fd = open(filename, O_RDONLY);
 	free(filename);
 	if ((int)fd == -1)
-	{
 		return (0);
-	}
 	if (!fstat(fd, &st))
 		filesize = st.st_size;
 	if (filesize < 2)
@@ -86,7 +83,7 @@ int read_history(info_t *info)
 	if (rdlen <= 0)
 		return (free(buf), 0);
 	close(fd);
-	for (i = 0; (int)i < filesize; i++)
+	for (i = 0; i < (size_t) filesize; i++)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
@@ -106,7 +103,7 @@ int read_history(info_t *info)
 }
 
 /**
- * history_list - this function adds entry to a history list
+ * build_history_list - this function adds entry to a history list
  * @info: Structure containing potential arguments
  * @buf: the buffer
  * @linecount: the history linecount
