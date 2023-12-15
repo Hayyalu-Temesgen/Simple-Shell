@@ -19,12 +19,12 @@ size_t len_list(const list_t *h)
 }
 
 /**
- * string_list - this function will return an array of strings
+ * list_to_strings - this function will return an array of strings
  * @head: the pointer
  * Return: will return the array of strings
  */
 
-char **string_list(list_t *head)
+char **list_to_strings(list_t *head)
 {
 	list_t *node = head;
 	size_t i = len_list(head), j;
@@ -78,14 +78,14 @@ size_t print_list(const list_t *h)
 }
 
 /**
- * node_start - this function will return node whose string starts with prefix
+ * node_starts_with - this function will return node whose string starts with prefix
  * @node: the pointer
  * @prefix: the string
  * @c: the next character after prefix to match
  * Return: will return the match node
  */
 
-list_t *node_start(list_t *node, char *prefix, char c)
+list_t *node_starts_with(list_t *node, char *prefix, char c)
 {
 	char *p = NULL;
 
